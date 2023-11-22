@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        horizontal = context.ReadValue<Vector2>().x;
+            horizontal = context.ReadValue<Vector2>().x;   
     }
     public void Jump(InputAction.CallbackContext context)
     {
