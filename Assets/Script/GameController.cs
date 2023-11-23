@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public Text txt_GoalsRight, txt_GoalsLeft, txt_timeMatch;
     public int number_GoalsRight, number_GoalsLeft;
-    public bool isScore, endMatch;
+    public bool isScore, endMatch, winPlayer;
     public float timeMatch;
     private GameObject theBall;
     public GameObject kickOffMsg;
@@ -59,12 +59,12 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void ContinueMatch()
+    public void ContinueMatch(bool winPlayer)
     {
-        StartCoroutine(WaitContinueMatch());
+        StartCoroutine(WaitContinueMatch(winPlayer));
     }
 
-    IEnumerator WaitContinueMatch()
+    IEnumerator WaitContinueMatch(bool winPlayer)
     {
         yield return new WaitForSeconds(2f);
         isScore = false;
@@ -75,6 +75,14 @@ public class GameController : MonoBehaviour
 
             thePlayer.gameObject.transform.position = new Vector2(0, 0);
             theOpponent.gameObject.transform.position = new Vector2(10, 0);
+            if(winPlayer == true)
+            {
+                theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-100, 200));
+            }
+            else
+            {
+                theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(100, 200));
+            }
         }
 
     }

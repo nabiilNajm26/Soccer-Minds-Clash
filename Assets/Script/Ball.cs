@@ -43,6 +43,8 @@ public class Ball : MonoBehaviour
                 GameController.instance.number_GoalsLeft++;
                 GameController.instance.isScore = true;
 
+                GameController.instance.ContinueMatch(true);
+
                 //Reset posisi dan force bola tiap skor dicetak
                 /*theBall.gameObject.transform.position = new Vector2(0, 0);
                 theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-400, 0));
@@ -62,6 +64,8 @@ public class Ball : MonoBehaviour
                 //Nambah value score
                 GameController.instance.number_GoalsRight++;
                 GameController.instance.isScore = true;
+
+                GameController.instance.ContinueMatch(false);
 
                 //Reset posisi dan force bola tiap skor dicetak
                 /*theBall.gameObject.transform.position = new Vector2(0, 0);

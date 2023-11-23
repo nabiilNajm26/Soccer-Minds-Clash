@@ -387,8 +387,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 211960836}
   - {fileID: 1657482960}
+  - {fileID: 211960836}
   m_Father: {fileID: 509199331}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &210670114
@@ -978,7 +978,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a5c72a5765286c548b4e1c21c7acbe2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1204,7 +1204,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: aa6f97c0a8ead274f8d75f3ba9362267, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1337,7 +1337,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: a3e9092b1d9048b40a3e78d6cc54fddd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -2299,6 +2299,7 @@ MonoBehaviour:
   number_GoalsLeft: 0
   isScore: 0
   endMatch: 0
+  winPlayer: 0
   timeMatch: 0
   kickOffMsg: {fileID: 1858853226072969655, guid: f299b88db883716448c4f96645a0fcc8, type: 3}
 --- !u!4 &986652157
@@ -2963,11 +2964,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1967769856}
-  - {fileID: 1411014603}
   - {fileID: 1862496470}
   - {fileID: 1913803754}
   - {fileID: 1944541527}
   - {fileID: 616822261}
+  - {fileID: 1411014603}
   m_Father: {fileID: 779294013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1247734898
@@ -4715,9 +4716,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1916607920}
-  - {fileID: 1298635826}
   - {fileID: 521830948}
   - {fileID: 1292068323}
+  - {fileID: 1298635826}
   - {fileID: 2070900090}
   - {fileID: 364846778}
   m_Father: {fileID: 779294013}
