@@ -15,6 +15,11 @@ public class GameController : MonoBehaviour
     public GameObject kickOffMsg;
     private GameObject thePlayer, theOpponent;
 
+    public Image flagLeft, flagRight;
+    public SpriteRenderer headPlayer1, bodyPlayer1, leftHandsPlayer1, rightHandsPlayer1, leftShoePlayer1, rightShoePlayer1;
+    public SpriteRenderer headPlayer2, bodyPlayer2, leftHandsPlayer2, rightHandsPlayer2, leftShoePlayer2, rightShoePlayer2;
+
+
     public void Awake()
     {
         if(instance == null)
@@ -30,6 +35,29 @@ public class GameController : MonoBehaviour
         theBall = GameObject.FindGameObjectWithTag("Ball");
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         theOpponent = GameObject.FindGameObjectWithTag("Opponent");
+
+        //Mengambil value dari play scene, dan diterapkan pada object player 1 serta player 2
+        flagLeft.sprite = TeamUI.instance.TeamFlag[PlayerPrefs.GetInt("valuePlayer1", 1) - 1];
+        flagRight.sprite = TeamUI.instance.TeamFlag[PlayerPrefs.GetInt("valuePlayer2", 1) - 1];
+
+        headPlayer1.sprite = TeamUI.instance.head[PlayerPrefs.GetInt("valuePlayer1", 1) - 1];
+        headPlayer2.sprite = TeamUI.instance.head[PlayerPrefs.GetInt("valuePlayer2", 1) - 1];
+
+        bodyPlayer1.sprite = TeamUI.instance.body[PlayerPrefs.GetInt("valuePlayer1", 1) - 1];
+        bodyPlayer2.sprite = TeamUI.instance.body[PlayerPrefs.GetInt("valuePlayer2", 1) - 1];
+
+        leftHandsPlayer1.sprite = TeamUI.instance.leftHands[PlayerPrefs.GetInt("valuePlayer1", 1) - 1];
+        leftHandsPlayer2.sprite = TeamUI.instance.leftHands[PlayerPrefs.GetInt("valuePlayer2", 1) - 1];
+
+        rightHandsPlayer1.sprite = TeamUI.instance.rightHands[PlayerPrefs.GetInt("valuePlayer1", 1) - 1];
+        rightHandsPlayer2.sprite = TeamUI.instance.rightHands[PlayerPrefs.GetInt("valuePlayer2", 1) - 1];
+
+        leftShoePlayer1.sprite = TeamUI.instance.leftShoe[PlayerPrefs.GetInt("valuePlayer1", 1) - 1];
+        leftShoePlayer2.sprite = TeamUI.instance.leftShoe[PlayerPrefs.GetInt("valuePlayer2", 1) - 1];
+
+        rightShoePlayer1.sprite = TeamUI.instance.rightShoe[PlayerPrefs.GetInt("valuePlayer1", 1) - 1];
+        rightShoePlayer2.sprite = TeamUI.instance.rightShoe[PlayerPrefs.GetInt("valuePlayer2", 1) - 1];
+
         StartCoroutine(BeginMatch());
     }
 
@@ -66,22 +94,26 @@ public class GameController : MonoBehaviour
 
     IEnumerator WaitContinueMatch(bool winPlayer)
     {
+        thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
+        theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
+        
+        thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezeRotation;
+        theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(2f);
         isScore = false;
         if(endMatch == false)
         {
             theBall.transform.position = new Vector3(0, 0, 0);
-            theBall.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 
             thePlayer.gameObject.transform.position = new Vector2(0, 0);
             theOpponent.gameObject.transform.position = new Vector2(10, 0);
             if(winPlayer == true)
             {
-                theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-100, 200));
+                theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(300, 0));
             }
             else
             {
-                theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(100, 200));
+                theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-300, 0));
             }
         }
 

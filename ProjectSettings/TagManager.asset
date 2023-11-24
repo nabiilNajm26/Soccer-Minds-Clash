@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Opponent
-  - Ball
   - GoalsRight
+  - Ball
   - GoalsLeft
   layers:
   - Default
@@ -46,5 +46,5 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Canvas
-    uniqueID: 668623431
+    uniqueID: 4238415427
     locked: 0

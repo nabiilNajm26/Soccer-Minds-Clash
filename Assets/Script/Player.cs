@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     public float horizontal;
     public float speed = 8f;
-    public float jumpingPower = 16f;
+    public float jumpingPower = 8f;
 
     public Rigidbody2D rb_player;
 
@@ -67,15 +67,7 @@ public class Player : MonoBehaviour
         Debug.Log(canShoot);
         if(canShoot == true)
         {
-            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(400, 500));
-        }
-    }
-    public void Shoot2(InputAction.CallbackContext context)
-    {
-        Debug.Log(canShoot);
-        if (canShoot == true)
-        {
-            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-400, 500));
+            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(200, 250));
         }
     }
 }

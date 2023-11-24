@@ -36,12 +36,16 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.tag == "GoalsRight")
         {
-            Instantiate(goals, new Vector3(0, -1, 0), Quaternion.identity);
             if (GameController.instance.isScore == false && GameController.instance.endMatch == false)
             {
+                Instantiate(goals, new Vector3(0, -1, 0), Quaternion.identity);
+
                 //Nambah value score
                 GameController.instance.number_GoalsLeft++;
                 GameController.instance.isScore = true;
+
+                thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
+                theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
 
                 GameController.instance.ContinueMatch(true);
 
@@ -58,12 +62,15 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.tag == "GoalsLeft")
         {
-            Instantiate(goals, new Vector3(0, -1, 0), Quaternion.identity);
             if (GameController.instance.isScore == false && GameController.instance.endMatch == false)
             {
+                Instantiate(goals, new Vector3(0, -1, 0), Quaternion.identity);
+
                 //Nambah value score
                 GameController.instance.number_GoalsRight++;
                 GameController.instance.isScore = true;
+
+                
 
                 GameController.instance.ContinueMatch(false);
 
@@ -73,8 +80,8 @@ public class Ball : MonoBehaviour
 
                 thePlayer.gameObject.transform.position = new Vector2(0, 0);
                 theOpponent.gameObject.transform.position = new Vector2(10, 0);
-                GameController.instance.isScore = false;*/
-
+                GameController.instance.isScore = false;
+*/
 
             }
         }
