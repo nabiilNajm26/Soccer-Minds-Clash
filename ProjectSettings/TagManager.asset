@@ -10,6 +10,7 @@ TagManager:
   - GoalsLeft
   - Head
   - OrientBall
+  - Target
   layers:
   - Default
   - TransparentFX

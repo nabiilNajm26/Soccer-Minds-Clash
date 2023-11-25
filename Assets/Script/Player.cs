@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public bool canShoot, canHead;
     private GameObject theBall;
 
+    public AudioSource kick;
+
 
     // Start is called before the first frame update
     void Start()
@@ -71,8 +73,12 @@ public class Player : MonoBehaviour
         Debug.Log(canShoot);
         if(canShoot == true)
         {
+            kick.Play();
             theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(200, 250));
+            
         }
+
+
     }
 
     public void Head()

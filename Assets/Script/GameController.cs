@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
     public SpriteRenderer headPlayer1, bodyPlayer1, leftHandsPlayer1, rightHandsPlayer1, leftShoePlayer1, rightShoePlayer1;
     public SpriteRenderer headPlayer2, bodyPlayer2, leftHandsPlayer2, rightHandsPlayer2, leftShoePlayer2, rightShoePlayer2;
 
+    public AudioSource backSound, backSoundEnd;
+    public AudioSource matchBegin, matchEnd;
 
     public void Awake()
     {
@@ -37,6 +39,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         panelPause.SetActive(false);
+        matchBegin.Play();
+        backSound.Play();
+
         number_GoalsRight = 0;
         number_GoalsLeft = 0;
         Time.timeScale = 1;
@@ -78,6 +83,8 @@ public class GameController : MonoBehaviour
         
 
         StartCoroutine(BeginMatch());
+
+        backSound.Play();
     }
 
     // Update is called once per frame
@@ -148,10 +155,12 @@ public class GameController : MonoBehaviour
     public void ButtonPause()
     {
         panelPause.SetActive(true);
+        backSound.Pause();
         Time.timeScale = 0;
     }
     public void ButtonResume()
     {
+        backSound.UnPause();
         panelPause.SetActive(false);
         Time.timeScale = 1;
     }
@@ -165,10 +174,13 @@ public class GameController : MonoBehaviour
         panelPause.SetActive(false);
         Time.timeScale = 1;
         StartCoroutine(WaitEndGame()); 
+        backSound.Stop();
     }
 
     IEnumerator WaitEndGame()
     {
+        backSoundEnd.Play();
+        matchEnd.Play();
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("EndGame");
     }

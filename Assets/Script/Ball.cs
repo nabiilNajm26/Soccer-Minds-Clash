@@ -8,6 +8,10 @@ public class Ball : MonoBehaviour
     private GameObject thePlayer;
     private GameObject theOpponent;
     public GameObject goals, theBall;
+
+    public AudioSource kenaGawang;
+    public AudioSource gol;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +38,10 @@ public class Ball : MonoBehaviour
             Debug.Log("P2 Kena Bola");
             theOpponent.GetComponent<PlayerTwo>().canShoot = true;
         }
+        if (collision.gameObject.tag == "Target")
+        {
+            kenaGawang.Play();
+        }
         if (collision.gameObject.tag == "Head")
         {
             Debug.Log("P1 Kena Kepala");
@@ -42,6 +50,7 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.tag == "GoalsRight")
         {
+            gol.Play();
             if (GameController.instance.isScore == false && GameController.instance.endMatch == false)
             {
                 Instantiate(goals, new Vector3(0, -1, 0), Quaternion.identity);
@@ -68,6 +77,7 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.tag == "GoalsLeft")
         {
+            gol.Play();
             if (GameController.instance.isScore == false && GameController.instance.endMatch == false)
             {
                 Instantiate(goals, new Vector3(0, -1, 0), Quaternion.identity);

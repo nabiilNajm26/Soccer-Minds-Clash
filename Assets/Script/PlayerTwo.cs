@@ -20,6 +20,7 @@ public class PlayerTwo : MonoBehaviour
     public bool isAI;
     private GameObject theBall, thePlayer;
 
+    public AudioSource kick;
 
 
     // Start is called before the first frame update
@@ -139,7 +140,9 @@ public class PlayerTwo : MonoBehaviour
         Debug.Log(canShoot);
         if (canShoot == true)
         {
+            kick.Play();
             theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-200, 300));
+            
         }
     }
 
@@ -148,6 +151,7 @@ public class PlayerTwo : MonoBehaviour
         Debug.Log(canShoot);
         if (canShoot == true)
         {
+            kick.Play();
             theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-200, 300));
         }
     }
