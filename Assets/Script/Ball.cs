@@ -41,7 +41,7 @@ public class Ball : MonoBehaviour
                 Instantiate(goals, new Vector3(0, -1, 0), Quaternion.identity);
 
                 //Nambah value score
-                GameController.instance.number_GoalsLeft++;
+                GameController.number_GoalsLeft++;
                 GameController.instance.isScore = true;
 
                 thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
@@ -67,7 +67,7 @@ public class Ball : MonoBehaviour
                 Instantiate(goals, new Vector3(0, -1, 0), Quaternion.identity);
 
                 //Nambah value score
-                GameController.instance.number_GoalsRight++;
+                GameController.number_GoalsRight++;
                 GameController.instance.isScore = true;
 
                 

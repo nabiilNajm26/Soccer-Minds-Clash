@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // Deklarasi kelas Menu yang merupakan turunan dari MonoBehaviour
@@ -76,6 +77,6 @@ public class Menu : MonoBehaviour
     public void ButtonPlay()
     {
         // Memuat level "Play"
-        Application.LoadLevel("Play");
+        SceneManager.LoadScene("Play");
     }
 }

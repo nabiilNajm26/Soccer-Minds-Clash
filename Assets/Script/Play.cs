@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // Deklarasi kelas Play yang merupakan turunan dari MonoBehaviour
@@ -45,12 +46,12 @@ public class Play : MonoBehaviour
     public void ButtonBack()
     {
         // Memuat level "Menu"
-        Application.LoadLevel("Menu");
+        SceneManager.LoadScene("Menu");
     }
 
     public void ButtonNext()
     {
-        Application.LoadLevel("Game");
+        SceneManager.LoadScene("Game");
     }
 
     // Method untuk mengubah pemilihan tim untuk Player 1 ke kiri
