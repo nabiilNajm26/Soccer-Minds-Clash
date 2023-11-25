@@ -34,6 +34,12 @@ public class Ball : MonoBehaviour
             Debug.Log("P2 Kena Bola");
             theOpponent.GetComponent<PlayerTwo>().canShoot = true;
         }
+        if (collision.gameObject.tag == "Head")
+        {
+            Debug.Log("P1 Kena Kepala");
+            thePlayer.GetComponent<Player>().canHead = true;
+            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(100, 150));
+        }
         if (collision.gameObject.tag == "GoalsRight")
         {
             if (GameController.instance.isScore == false && GameController.instance.endMatch == false)
@@ -97,6 +103,11 @@ public class Ball : MonoBehaviour
         {
             Debug.Log("P2 Lepas Bola");
             theOpponent.GetComponent<PlayerTwo>().canShoot = false;
+        }
+        if (collision.gameObject.tag == "Head")
+        {
+            Debug.Log("P1 Lepas Kepala");
+            thePlayer.GetComponent<Player>().canHead = false;
         }
     }
 }

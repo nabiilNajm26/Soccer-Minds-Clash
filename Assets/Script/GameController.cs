@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
     public GameObject panelPause;
     private GameObject thePlayer, theOpponent;
 
+    public string rematch;
+    public string replay;
+
     public Image flagLeft, flagRight;
     public Text nameLeft, nameRight;
     public SpriteRenderer headPlayer1, bodyPlayer1, leftHandsPlayer1, rightHandsPlayer1, leftShoePlayer1, rightShoePlayer1;
@@ -34,11 +37,15 @@ public class GameController : MonoBehaviour
     void Start()
     {
         panelPause.SetActive(false);
+        number_GoalsRight = 0;
+        number_GoalsLeft = 0;
+        Time.timeScale = 1;
         timeMatch = 90;
         Instantiate(kickOffMsg, new Vector3(0, -1, 0), Quaternion.identity);
         theBall = GameObject.FindGameObjectWithTag("Ball");
         thePlayer = GameObject.FindGameObjectWithTag("Player");
         theOpponent = GameObject.FindGameObjectWithTag("Opponent");
+
 
         //Mengambil value dari play scene, dan diterapkan pada object player 1 serta player 2
         flagLeft.sprite = TeamUI.instance.TeamFlag[PlayerPrefs.GetInt("valuePlayer1", 1) - 1];
@@ -79,6 +86,8 @@ public class GameController : MonoBehaviour
         txt_GoalsLeft.text = number_GoalsLeft.ToString();
         txt_GoalsRight.text = number_GoalsRight.ToString();
         txt_timeMatch.text = timeMatch.ToString();
+
+     
     }
 
     IEnumerator BeginMatch()
@@ -94,7 +103,8 @@ public class GameController : MonoBehaviour
             else
             {
                 endMatch = true;
-                break;
+                StartCoroutine(WaitEndGame());
+
             }
         }
     }
@@ -128,9 +138,13 @@ public class GameController : MonoBehaviour
                 theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-300, 0));
             }
         }
+        else if(endMatch == true)
+        {
+            StartCoroutine(WaitEndGame());
+        }
 
     }
-
+    
     public void ButtonPause()
     {
         panelPause.SetActive(true);
@@ -140,6 +154,10 @@ public class GameController : MonoBehaviour
     {
         panelPause.SetActive(false);
         Time.timeScale = 1;
+    }
+    public void ButtonRestart()
+    {
+        SceneManager.LoadScene("Game");
     }
     public void ButtonEnd()
     {

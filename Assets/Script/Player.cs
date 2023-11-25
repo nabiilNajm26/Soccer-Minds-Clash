@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D rb_player;
 
-    public bool canShoot;
+    public bool canShoot, canHead;
     private GameObject theBall;
 
 
@@ -52,6 +52,10 @@ public class Player : MonoBehaviour
         if (context.performed && isGrounded())
         {
             rb_player.velocity = new Vector2(rb_player.velocity.x, jumpingPower);
+            if(canHead == true)
+            {
+                Head();
+            }
         }
         if(context.canceled && rb_player.velocity.y > 0f)
         {
@@ -66,6 +70,14 @@ public class Player : MonoBehaviour
     {
         Debug.Log(canShoot);
         if(canShoot == true)
+        {
+            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(200, 250));
+        }
+    }
+
+    public void Head()
+    {
+        if(canHead == true)
         {
             theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(200, 250));
         }

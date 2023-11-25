@@ -1545,6 +1545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 509199331}
+  - component: {fileID: 509199332}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -1571,6 +1572,27 @@ Transform:
   - {fileID: 1783418808}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &509199332
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509199330}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4bc8f27fa9f2eed4796992a177157d94, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &521830947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,7 +2060,7 @@ GameObject:
   - component: {fileID: 777795964}
   m_Layer: 7
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2139,7 +2161,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2524,7 +2546,7 @@ GameObject:
   - component: {fileID: 917238254}
   - component: {fileID: 917238253}
   m_Layer: 5
-  m_Name: Button Sound
+  m_Name: Button Restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2593,13 +2615,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 986652155}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 986652156}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: ButtonRestart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2625,7 +2647,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 699c18454a7a13447b9d68ffda0512ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68fa0b22ac66e7b478a33e0f55731e6b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2681,6 +2703,8 @@ MonoBehaviour:
   timeMatch: 0
   kickOffMsg: {fileID: 1858853226072969655, guid: f299b88db883716448c4f96645a0fcc8, type: 3}
   panelPause: {fileID: 1824950436}
+  rematch: 
+  replay: 
   flagLeft: {fileID: 266857943}
   flagRight: {fileID: 1905578087}
   nameLeft: {fileID: 64217791}
@@ -3029,6 +3053,7 @@ MonoBehaviour:
   jumpingPower: 6
   rb_player: {fileID: 0}
   canShoot: 0
+  canHead: 0
 --- !u!114 &1131391533
 MonoBehaviour:
   m_ObjectHideFlags: 0

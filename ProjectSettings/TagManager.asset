@@ -8,6 +8,8 @@ TagManager:
   - GoalsRight
   - Ball
   - GoalsLeft
+  - Head
+  - OrientBall
   layers:
   - Default
   - TransparentFX
