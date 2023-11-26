@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,10 +9,16 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
-    public Text txt_GoalsRight, txt_GoalsLeft, txt_timeMatch;
+    
     public static int number_GoalsRight, number_GoalsLeft;
+
+    public Text txt_GoalsRight, txt_GoalsLeft, txt_timeMatch;
+
     public bool isScore, endMatch, winPlayer;
+    public bool skillAvailP1, skillAvailP2;
+
     public float timeMatch;
+
     private GameObject theBall;
     public GameObject kickOffMsg;
     public GameObject panelPause;
@@ -28,6 +35,11 @@ public class GameController : MonoBehaviour
     public AudioSource backSound, backSoundEnd;
     public AudioSource matchBegin, matchEnd;
 
+    public Sprite[] versiButtonSkill1, versiButtonSkill2;
+
+    public Image buttonSkillPlayer, buttonSkillOpp;
+    public GameObject btnSkillPlayer, btnSkillOpp;
+
     public void Awake()
     {
         if(instance == null)
@@ -39,6 +51,32 @@ public class GameController : MonoBehaviour
     void Start()
     {
         panelPause.SetActive(false);
+        btnSkillPlayer.SetActive(true);
+        btnSkillOpp.SetActive(true);
+
+        skillAvailP1 = true;
+        skillAvailP2 = true;
+
+        if(skillAvailP1 == true)
+        {
+            buttonSkillPlayer.sprite = versiButtonSkill1[0];
+        }
+        else if(skillAvailP1 == false)
+        {
+            buttonSkillPlayer.sprite = versiButtonSkill1[1];
+        }
+
+        if (skillAvailP2 == true)
+        {
+            buttonSkillOpp.sprite = versiButtonSkill2[0];
+        }
+        else if (skillAvailP2 == false)
+        {
+            buttonSkillOpp.sprite = versiButtonSkill2[1];
+        }
+
+
+
         matchBegin.Play();
         backSound.Play();
 
@@ -93,7 +131,6 @@ public class GameController : MonoBehaviour
         txt_GoalsLeft.text = number_GoalsLeft.ToString();
         txt_GoalsRight.text = number_GoalsRight.ToString();
         txt_timeMatch.text = timeMatch.ToString();
-
      
     }
 
@@ -155,13 +192,18 @@ public class GameController : MonoBehaviour
     public void ButtonPause()
     {
         panelPause.SetActive(true);
+        btnSkillPlayer.SetActive(false);
+        btnSkillOpp.SetActive(true);
         backSound.Pause();
         Time.timeScale = 0;
+        
     }
     public void ButtonResume()
     {
         backSound.UnPause();
         panelPause.SetActive(false);
+        btnSkillPlayer.SetActive(true);
+        btnSkillOpp.SetActive(true);
         Time.timeScale = 1;
     }
     public void ButtonRestart()
@@ -177,6 +219,38 @@ public class GameController : MonoBehaviour
         backSound.Stop();
     }
 
+    public void ButtonSkill1()
+    {
+        if(skillAvailP1 == true)
+        {
+            thePlayer.GetComponent<Player>().speed = 12f;
+            thePlayer.GetComponent<Player>().jumpingPower += 2;
+            thePlayer.GetComponent<Player>().shootingPowerY = 450;
+            thePlayer.GetComponent<Player>().shootingPowerX = 400;
+
+            skillAvailP1 = false;
+            buttonSkillPlayer.sprite = versiButtonSkill1[1];
+        }
+
+    }
+
+    public void ButtonSkill2()
+    {
+        if(skillAvailP2 == true)
+        {
+            theOpponent.GetComponent<Transform>().position += new Vector3(3f, 0.68f, 0f);
+            theOpponent.GetComponent<Transform>().localScale += new Vector3(0.4f, 0.4f, 0.4f);
+
+            skillAvailP2 = false;
+            buttonSkillOpp.sprite = versiButtonSkill2[1];
+            StartCoroutine(WaitSkill2());
+        }
+        
+    }
+
+    
+
+
     IEnumerator WaitEndGame()
     {
         backSoundEnd.Play();
@@ -184,4 +258,14 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("EndGame");
     }
+
+    IEnumerator WaitSkill2()
+    {
+        
+        yield return new WaitForSeconds(5);
+
+        theOpponent.GetComponent<Transform>().localScale -= new Vector3(0.4f, 0.4f, 0.4f);
+        theOpponent.GetComponent<Transform>().position -= new Vector3(3f, 0.68f, 0f);
+    }
+
 }

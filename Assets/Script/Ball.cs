@@ -40,13 +40,20 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.tag == "Target")
         {
+            Debug.Log("Natap");
             kenaGawang.Play();
         }
-        if (collision.gameObject.tag == "Head")
+        if (collision.gameObject.tag == "HeadPlayer")
         {
             Debug.Log("P1 Kena Kepala");
             thePlayer.GetComponent<Player>().canHead = true;
-            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(100, 150));
+            
+        }
+        if (collision.gameObject.tag == "HeadOpp")
+        {
+            Debug.Log("P2 Kena Kepala");
+            theOpponent.GetComponent<PlayerTwo>().canHead = true;
+            
         }
         if (collision.gameObject.tag == "GoalsRight")
         {
@@ -114,10 +121,15 @@ public class Ball : MonoBehaviour
             Debug.Log("P2 Lepas Bola");
             theOpponent.GetComponent<PlayerTwo>().canShoot = false;
         }
-        if (collision.gameObject.tag == "Head")
+        if (collision.gameObject.tag == "HeadPlayer")
         {
             Debug.Log("P1 Lepas Kepala");
             thePlayer.GetComponent<Player>().canHead = false;
+        }
+        if (collision.gameObject.tag == "HeadOpp")
+        {
+            Debug.Log("P2 Lepas Kepala");
+            theOpponent.GetComponent<PlayerTwo>().canHead = false;
         }
     }
 }

@@ -11,6 +11,9 @@ TagManager:
   - Head
   - OrientBall
   - Target
+  - HeadPlayer
+  - HeadOpp
+  - Ground
   layers:
   - Default
   - TransparentFX

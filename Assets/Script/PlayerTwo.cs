@@ -113,6 +113,7 @@ public class PlayerTwo : MonoBehaviour
         if (context.performed && isGrounded())
         {
             rb_player.velocity = new Vector2(rb_player.velocity.x, jumpingPower);
+            
         }
         if (context.canceled && rb_player.velocity.y > 0f)
         {
@@ -153,6 +154,16 @@ public class PlayerTwo : MonoBehaviour
         {
             kick.Play();
             theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-200, 300));
+        }
+    }
+
+    public void Head()
+    {
+        if (canHead == true)
+        {
+            rb_player.velocity = new Vector2(rb_player.velocity.x, jumpingPower);
+            theBall.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-300, 500));
         }
     }
 }
