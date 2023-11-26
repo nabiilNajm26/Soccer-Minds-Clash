@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     public float speed = 8f;
     public float jumpingPower = 8f;
 
-    public int shootingPowerX = 300;
-    public int shootingPowerY = 350;
+    public int shootingPowerX = 200;
+    public int shootingPowerY = 300;
 
     public Rigidbody2D rb_player;
 
@@ -75,21 +75,19 @@ public class Player : MonoBehaviour
     {
 
         horizontal = context.ReadValue<Vector2>().x;
-        theAniPlayer.SetBool("MoveBW", false);
-        theAniPlayer.SetBool("MoveFW", true);
 
-        /*if (horizontal > 0)
+        if (isGrounded())
         {
-            Debug.Log("maju kedepan");
-            theAniPlayer.SetBool("MoveBW", false);
-            theAniPlayer.SetBool("MoveFW", true);
+            if (horizontal > 0)
+            {
+                theAniPlayer.SetTrigger("MoveFW");
+            }
+            else if (horizontal < 0)
+            {
+                theAniPlayer.SetTrigger("MoveBW");
+            }
         }
-        if(horizontal < 0)
-        {
-            Debug.Log("maju kebelakang");
-            theAniPlayer.SetBool("MoveFW", false);
-            theAniPlayer.SetBool("MoveBW", true);
-        }*/
+        
     }
     public void Jump(InputAction.CallbackContext context)
     {

@@ -16,9 +16,15 @@ public class PlayerTwo : MonoBehaviour
 
     public Rigidbody2D rb_player;
 
+    public int shootingPowerX = -200;
+    public int shootingPowerY = 300;
+
     public bool canShoot, canHead;
     public bool isAI;
     private GameObject theBall, thePlayer;
+
+    public int hashShoot, hashJump, hashMoveFW, hashMoveBW;
+    public Animator theAniOpp;
 
     public AudioSource kick;
 
@@ -34,6 +40,10 @@ public class PlayerTwo : MonoBehaviour
             speed = 300f;
         }
 
+        hashShoot = Animator.StringToHash("Shoot");
+        hashJump = Animator.StringToHash("Jump");
+        hashMoveBW = Animator.StringToHash("MoveBW");
+        hashMoveFW = Animator.StringToHash("MoveFW");
     }
     private void FixedUpdate()
     {
@@ -73,7 +83,20 @@ public class PlayerTwo : MonoBehaviour
     //Move method untuk P2
     public void Move(InputAction.CallbackContext context)
     {
-            horizontal = context.ReadValue<Vector2>().x;   
+        horizontal = context.ReadValue<Vector2>().x;
+
+        if (isGrounded())
+        {
+            if (horizontal > 0)
+            {
+                theAniOpp.SetTrigger("MoveBW");
+            }
+            else if (horizontal < 0)
+            {
+                theAniOpp.SetTrigger("MoveFW");
+            }
+        }
+        
     }
 
     //Move method untuk AI
@@ -112,8 +135,8 @@ public class PlayerTwo : MonoBehaviour
 
         if (context.performed && isGrounded())
         {
+            theAniOpp.SetTrigger("Jump");
             rb_player.velocity = new Vector2(rb_player.velocity.x, jumpingPower);
-            
         }
         if (context.canceled && rb_player.velocity.y > 0f)
         {
@@ -141,8 +164,9 @@ public class PlayerTwo : MonoBehaviour
         Debug.Log(canShoot);
         if (canShoot == true)
         {
+            theAniOpp.SetTrigger("Shoot");
             kick.Play();
-            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-200, 300));
+            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(shootingPowerX, shootingPowerY));
             
         }
     }
@@ -152,8 +176,9 @@ public class PlayerTwo : MonoBehaviour
         Debug.Log(canShoot);
         if (canShoot == true)
         {
+            theAniOpp.SetTrigger("Shoot");
             kick.Play();
-            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-200, 300));
+            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(shootingPowerX, shootingPowerY));
         }
     }
 

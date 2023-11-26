@@ -36,6 +36,7 @@ public class Menu : MonoBehaviour
             // Jika isLoading true, menonaktifkan panelLoading
             panelLoading.SetActive(false);
         }
+
     }
 
     // Update is called once per frame
@@ -89,13 +90,11 @@ public class Menu : MonoBehaviour
     public void ButtonPlay()
     {
         // Memuat level "Play"
-        backsound.Stop();
         SceneManager.LoadScene("Play");
     }
 
     public void ButtonTutorial()
     {
-        backsound.Stop();
         SceneManager.LoadScene("Tutorial");
     }
 
