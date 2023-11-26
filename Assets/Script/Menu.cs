@@ -14,6 +14,12 @@ public class Menu : MonoBehaviour
     public static bool isLoading = false;
     public Text txt_loading;
 
+    public AudioSource backsound;
+
+    public Animator anim;
+    public string animationTitle;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,21 +68,39 @@ public class Menu : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         // Menampilkan panelTransit dan menunggu selama 1.5 detik
+        backsound.Play();
         panelTransit.SetActive(true);
         yield return new WaitForSeconds(1.5f);
 
         // Menonaktifkan panelLoading dan menunggu selama 1.5 detik
+        
         panelLoading.SetActive(false);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.7f);
 
         // Menonaktifkan panelTransit setelah proses loading selesai
+        
         panelTransit.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+        anim.Play(animationTitle);
     }
 
     // Method yang dipanggil saat tombol play ditekan
     public void ButtonPlay()
     {
         // Memuat level "Play"
+        backsound.Stop();
         SceneManager.LoadScene("Play");
+    }
+
+    public void ButtonTutorial()
+    {
+        backsound.Stop();
+        SceneManager.LoadScene("Tutorial");
+    }
+
+    public void ButtonQuit()
+    {
+        Application.Quit();
     }
 }

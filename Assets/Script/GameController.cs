@@ -20,8 +20,8 @@ public class GameController : MonoBehaviour
     public float timeMatch;
 
     private GameObject theBall;
-    public GameObject kickOffMsg;
-    public GameObject panelPause;
+    public GameObject kickOffMsg, matchOverMsg;
+    public GameObject panelPause, panelHelp;
     private GameObject thePlayer, theOpponent;
 
     public string rematch;
@@ -51,6 +51,8 @@ public class GameController : MonoBehaviour
     void Start()
     {
         panelPause.SetActive(false);
+        panelHelp.SetActive(false);
+
         btnSkillPlayer.SetActive(true);
         btnSkillOpp.SetActive(true);
 
@@ -216,7 +218,7 @@ public class GameController : MonoBehaviour
         panelPause.SetActive(false);
         Time.timeScale = 1;
         StartCoroutine(WaitEndGame()); 
-        backSound.Stop();
+        
     }
 
     public void ButtonSkill1()
@@ -253,8 +255,17 @@ public class GameController : MonoBehaviour
 
     IEnumerator WaitEndGame()
     {
+
+        backSound.Stop();
         backSoundEnd.Play();
         matchEnd.Play();
+
+        thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
+        thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionY;
+        theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
+        theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionY;
+
+        Instantiate(matchOverMsg, new Vector3(0, -1, 0), Quaternion.identity);
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("EndGame");
     }

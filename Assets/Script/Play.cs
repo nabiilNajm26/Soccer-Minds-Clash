@@ -16,6 +16,14 @@ public class Play : MonoBehaviour
 
     public int valuePlayer1, valuePlayer2;
 
+    public AudioSource backsound;
+
+
+    private void Awake()
+    {
+        backsound.Play();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +59,7 @@ public class Play : MonoBehaviour
 
     public void ButtonNext()
     {
+        backsound.Stop();
         SceneManager.LoadScene("Game");
     }
 
