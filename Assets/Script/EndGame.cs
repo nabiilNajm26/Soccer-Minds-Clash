@@ -82,7 +82,7 @@ public class EndGame : MonoBehaviour
     public void ButtonRematch()
     {
         rematch = true;
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Qpemainpertama");
     }
 
     public void ButtonPlay()

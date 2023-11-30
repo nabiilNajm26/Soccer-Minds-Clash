@@ -60,7 +60,7 @@ public class Play : MonoBehaviour
     public void ButtonNext()
     {
         backsound.Stop();
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Qpemainpertama");
     }
 
     // Method untuk mengubah pemilihan tim untuk Player 1 ke kiri

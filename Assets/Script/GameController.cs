@@ -41,12 +41,18 @@ public class GameController : MonoBehaviour
     public Image buttonSkillPlayer, buttonSkillOpp;
     public GameObject btnSkillPlayer, btnSkillOpp;
 
+    SimpanJawaban1 simpan1;
+    SimpanJawaban2 simpan2;
+
     public void Awake()
     {
         if(instance == null)
         {
             instance = this; 
         }
+
+        simpan1 = FindObjectOfType<SimpanJawaban1>();
+        simpan2 = FindObjectOfType<SimpanJawaban2>();
     }
 
     // Start is called before the first frame update
@@ -59,8 +65,23 @@ public class GameController : MonoBehaviour
         btnSkillPlayer.SetActive(true);
         btnSkillOpp.SetActive(true);
 
-        skillAvailP1 = true;
-        skillAvailP2 = true;
+
+        if (simpan1.GetJawaban() == "benar"){
+            skillAvailP1 = true;
+        }
+        else
+        {
+            skillAvailP1 = false;
+        }
+        
+        if (simpan2.GetJawaban() == "benar")
+        {
+            skillAvailP2 = true;
+        }
+        else { 
+            skillAvailP2 = false; 
+        }
+        
 
         if(skillAvailP1 == true)
         {
@@ -239,7 +260,7 @@ public class GameController : MonoBehaviour
     }
     public void ButtonRestart()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Qpemainpertama");
     }
     public void ButtonEnd()
     {
