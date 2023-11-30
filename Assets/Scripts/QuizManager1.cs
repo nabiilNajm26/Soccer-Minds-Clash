@@ -30,7 +30,8 @@ public class QuizManager1 : MonoBehaviour
 
     SimpanJawaban1 simpan1;
 
-    [System.Serializable] class Question
+    [System.Serializable]
+    class Question
     {
         [SerializeField] public string questionTxt;
         [SerializeField] public string[] choices = new string[4];
@@ -83,7 +84,7 @@ public class QuizManager1 : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.W))
+        /*if (Input.GetKeyUp(KeyCode.W))
         {
             funButton(0);
 
@@ -102,18 +103,18 @@ public class QuizManager1 : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.D))
         {
             funButton(3);
-        }
+        }*/
 
         currentTime -= 1 * Time.deltaTime;
         countdownText = countdownTxt.GetComponent<TMP_Text>();
         countdownText.text = currentTime.ToString("0");
 
-        
+
 
         if (currentTime <= 0)
         {
             currentTime = 0;
-            if(!playerAnswered)
+            if (!playerAnswered)
             {
                 bAs1 = "salah";
                 Ld.LoadNextLevel();
@@ -123,7 +124,7 @@ public class QuizManager1 : MonoBehaviour
 
         /*StartCoroutine(StartCountdown());*/
 
-        
+
 
         //Debug.Log("bas1 = " + bAs1);
 
@@ -152,7 +153,7 @@ public class QuizManager1 : MonoBehaviour
         button3.GetComponent<Button>().onClick.AddListener(delegate () { funButton(2); });
         button4.GetComponent<Button>().onClick.AddListener(delegate () { funButton(3); });
 
-        
+
 
         // Initialization (Start the game)
         randomQues();
@@ -195,7 +196,7 @@ public class QuizManager1 : MonoBehaviour
             quesList[randomIndex] = temporary;
         }
 
-          
+
     }
 
     void showQuestion()
@@ -265,4 +266,28 @@ public class QuizManager1 : MonoBehaviour
         return bAs1;
     }
 
+    public void ButtonAns1()
+    {
+
+        funButton(0);
+
+    }
+    public void ButtonAns2()
+    {
+
+        funButton(1);
+
+    }
+    public void ButtonAns3()
+    {
+
+        funButton(2);
+
+    }
+    public void ButtonAns4()
+    {
+
+        funButton(3);
+
+    }
 }
