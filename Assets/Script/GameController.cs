@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
-    
+
     public static int number_GoalsRight, number_GoalsLeft;
 
     public Text txt_GoalsRight, txt_GoalsLeft, txt_timeMatch;
@@ -46,9 +46,9 @@ public class GameController : MonoBehaviour
 
     public void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
-            instance = this; 
+            instance = this;
         }
 
         simpan1 = FindObjectOfType<SimpanJawaban1>();
@@ -60,34 +60,37 @@ public class GameController : MonoBehaviour
     {
         isPaused = false;
         panelPause.SetActive(false);
-        panelHelp.SetActive(false);
+
+        
 
         btnSkillPlayer.SetActive(true);
         btnSkillOpp.SetActive(true);
 
 
-        if (simpan1.GetJawaban() == "benar"){
+        if (simpan1.GetJawaban() == "benar")
+        {
             skillAvailP1 = true;
         }
         else
         {
             skillAvailP1 = false;
         }
-        
+
         if (simpan2.GetJawaban() == "benar")
         {
             skillAvailP2 = true;
         }
-        else { 
-            skillAvailP2 = false; 
+        else
+        {
+            skillAvailP2 = false;
         }
-        
 
-        if(skillAvailP1 == true)
+
+        if (skillAvailP1 == true)
         {
             buttonSkillPlayer.sprite = versiButtonSkill1[0];
         }
-        else if(skillAvailP1 == false)
+        else if (skillAvailP1 == false)
         {
             buttonSkillPlayer.sprite = versiButtonSkill1[1];
         }
@@ -141,7 +144,9 @@ public class GameController : MonoBehaviour
         rightShoePlayer1.sprite = TeamUI.instance.rightShoe[PlayerPrefs.GetInt("valuePlayer1", 1) - 1];
         rightShoePlayer2.sprite = TeamUI.instance.rightShoe[PlayerPrefs.GetInt("valuePlayer2", 1) - 1];
 
+        
         StartCoroutine(BeginMatch());
+        
 
         backSound.Play();
     }
@@ -152,12 +157,18 @@ public class GameController : MonoBehaviour
         txt_GoalsLeft.text = number_GoalsLeft.ToString();
         txt_GoalsRight.text = number_GoalsRight.ToString();
         txt_timeMatch.text = timeMatch.ToString();
-     
+
     }
 
     IEnumerator BeginMatch()
     {
-        
+        backSound.Pause();
+        Time.timeScale = 0;
+        panelHelp.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        panelHelp.SetActive(false);
         while (true)
         {
             yield return new WaitForSeconds(1f);
@@ -189,18 +200,18 @@ public class GameController : MonoBehaviour
     {
         thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
         theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
-        
+
         thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezeRotation;
         theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(2f);
         isScore = false;
-        if(endMatch == false)
+        if (endMatch == false)
         {
             theBall.transform.position = new Vector3(0, 0, 0);
 
             thePlayer.gameObject.transform.position = new Vector2(0, 0);
             theOpponent.gameObject.transform.position = new Vector2(10, 0);
-            if(winPlayer == true)
+            if (winPlayer == true)
             {
                 theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(300, 0));
             }
@@ -209,7 +220,7 @@ public class GameController : MonoBehaviour
                 theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(-300, 0));
             }
         }
-        else if(endMatch == true)
+        else if (endMatch == true)
         {
             //Start memutar audio
             backSound.Stop();
@@ -220,7 +231,7 @@ public class GameController : MonoBehaviour
         }
 
     }
-    
+
     public void ButtonPause()
     {
         /* if (isPaused == false)
@@ -254,7 +265,7 @@ public class GameController : MonoBehaviour
         panelPause.SetActive(false);
         btnSkillPlayer.SetActive(true);
         btnSkillOpp.SetActive(true);
-        
+
 
         Time.timeScale = 1;
     }
@@ -268,12 +279,12 @@ public class GameController : MonoBehaviour
         panelPause.SetActive(false);
         Time.timeScale = 1;
         /*StartCoroutine(WaitEndGame()); */
-        
+
     }
 
     public void ButtonSkill1()
     {
-        if(skillAvailP1 == true)
+        if (skillAvailP1 == true)
         {
             thePlayer.GetComponent<Player>().speed += 4f;
             thePlayer.GetComponent<Player>().jumpingPower += 2;
@@ -289,7 +300,7 @@ public class GameController : MonoBehaviour
 
     public void ButtonSkill2()
     {
-        if(skillAvailP2 == true)
+        if (skillAvailP2 == true)
         {
             theOpponent.GetComponent<Transform>().position += new Vector3(3f, 0.68f, 0f);
             theOpponent.GetComponent<Transform>().localScale += new Vector3(0.4f, 0.4f, 0.4f);
@@ -299,12 +310,12 @@ public class GameController : MonoBehaviour
             buttonSkillOpp.sprite = versiButtonSkill2[1];
             StartCoroutine(WaitSkill2());
         }
-        
+
     }
 
     IEnumerator WaitEndGame()
     {
-        
+
 
         //Untuk freeze posisi dan rotasi P1 dan P2
         thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
@@ -334,11 +345,12 @@ public class GameController : MonoBehaviour
     }
     IEnumerator WaitSkill2()
     {
-        
+
         yield return new WaitForSeconds(5);
 
         theOpponent.GetComponent<Transform>().localScale -= new Vector3(0.4f, 0.4f, 0.4f);
         theOpponent.GetComponent<Transform>().position -= new Vector3(3f, 0.68f, 0f);
     }
 
+    
 }
