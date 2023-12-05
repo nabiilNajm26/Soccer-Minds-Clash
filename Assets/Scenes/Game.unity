@@ -829,7 +829,7 @@ MonoBehaviour:
     m_ActionId: 3bb981e2-79f6-4e04-a813-a06d5fea9e21
     m_ActionName: Player/Skill[/Keyboard/numpad0]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
