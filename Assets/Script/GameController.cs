@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
 
     public Text txt_GoalsRight, txt_GoalsLeft, txt_timeMatch;
 
-    public bool isScore, endMatch, winPlayer, isPaused;
+    public bool isScore, endMatch, winPlayer, isPaused, isHelp;
     public bool skillAvailP1, skillAvailP2;
 
     public float timeMatch;
@@ -44,6 +44,8 @@ public class GameController : MonoBehaviour
     SimpanJawaban1 simpan1;
     SimpanJawaban2 simpan2;
 
+
+
     public void Awake()
     {
         if (instance == null)
@@ -53,15 +55,18 @@ public class GameController : MonoBehaviour
 
         simpan1 = FindObjectOfType<SimpanJawaban1>();
         simpan2 = FindObjectOfType<SimpanJawaban2>();
+
+        isPaused = false;
+        isHelp = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        isPaused = false;
-        panelPause.SetActive(false);
-
         
+
+        panelPause.SetActive(false);
+        panelHelp.SetActive(false);
 
         btnSkillPlayer.SetActive(true);
         btnSkillOpp.SetActive(true);
@@ -162,13 +167,13 @@ public class GameController : MonoBehaviour
 
     IEnumerator BeginMatch()
     {
-        backSound.Pause();
+        /*backSound.Pause();
         Time.timeScale = 0;
         panelHelp.SetActive(true);
 
         yield return new WaitForSeconds(5);
 
-        panelHelp.SetActive(false);
+        panelHelp.SetActive(false);*/
         while (true)
         {
             yield return new WaitForSeconds(1f);
@@ -234,30 +239,66 @@ public class GameController : MonoBehaviour
 
     public void ButtonPause()
     {
-        /* if (isPaused == false)
-         {
-             panelPause.SetActive(true);
-             btnSkillPlayer.SetActive(false);
-             btnSkillOpp.SetActive(true);
-             backSound.Pause();
-             Time.timeScale = 0;
+        if (isPaused == false)
+        {
+            isPaused = true;
 
-             isPaused = true;
-         }
+            panelPause.SetActive(true);
+            btnSkillPlayer.SetActive(false);
+            btnSkillOpp.SetActive(true);
+            backSound.Pause();
+            Time.timeScale = 0;
 
-         if (isPaused == true)
-         {
-             isPaused = false;
-             ButtonResume();
-         }
- */
-        panelPause.SetActive(true);
+            
+        }
+
+        else if (isPaused == true)
+        {
+            isPaused = false;
+
+            backSound.UnPause();
+            panelPause.SetActive(false);
+            btnSkillPlayer.SetActive(true);
+            btnSkillOpp.SetActive(true);
+
+
+            Time.timeScale = 1;
+            
+
+        }
+
+        /*panelPause.SetActive(true);
         btnSkillPlayer.SetActive(false);
         btnSkillOpp.SetActive(true);
         backSound.Pause();
         Time.timeScale = 0;
+*/
+
+    }
+
+    public void ButtonHelp()
+    {
+        if(isHelp == false)
+        {
+            panelHelp.SetActive(true);
+            btnSkillPlayer.SetActive(false);
+            btnSkillOpp.SetActive(true);
+            backSound.Pause();
+            Time.timeScale = 0;
+
+            isHelp = true;
+        }
+        else if(isHelp == true)
+        {
+            backSound.UnPause();
+            panelHelp.SetActive(false);
+            btnSkillPlayer.SetActive(true);
+            btnSkillOpp.SetActive(true);
 
 
+            Time.timeScale = 1;
+        }
+        
     }
     public void ButtonResume()
     {
