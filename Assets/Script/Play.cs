@@ -1,6 +1,7 @@
 // Import library atau namespace yang diperlukan
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,9 @@ public class Play : MonoBehaviour
     public Text txtValuePlayer1, namePlayer1;
     public Image flagPlayer2, starPlayer2;
     public Text txtValuePlayer2, namePlayer2;
+    public TMP_Text txtReadyPlayer1, txtReadyPlayer2;
+
+    public bool isReadyP1, isReadyP2;
 
     public int valuePlayer1, valuePlayer2;
 
@@ -48,6 +52,11 @@ public class Play : MonoBehaviour
         namePlayer2.text = TeamUI.instance.TeamName[PlayerPrefs.GetInt("valuePlayer2", 1) - 1];
         txtValuePlayer2.text = PlayerPrefs.GetInt("valuePlayer2", 1).ToString() + "/8";
         GetStarPlayer2();
+
+        if(isReadyP1 == true && isReadyP2 == true)
+        {
+            StartCoroutine(StartGameWait());
+        }
     }
 
     // Method yang dipanggil saat tombol kembali ditekan
@@ -57,11 +66,11 @@ public class Play : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
-    public void ButtonNext()
+   /* public void ButtonNext()
     {
         backsound.Stop();
         SceneManager.LoadScene("Qpemainpertama");
-    }
+    }*/
 
     // Method untuk mengubah pemilihan tim untuk Player 1 ke kiri
     public void ButtonLeftPlayer1()
@@ -149,5 +158,39 @@ public class Play : MonoBehaviour
         {
             starPlayer2.sprite = TeamUI.instance.Star[3];
         }
+    }
+
+    public void ReadyP1()
+    {
+        isReadyP1 = true;
+
+        txtReadyPlayer1.SetText("Ready");
+    }
+
+    public void ReadyP2()
+    {
+        isReadyP2 = true;
+
+        txtReadyPlayer2.SetText("Ready");
+    }
+
+    public void CancelP1()
+    {
+        isReadyP1 = false;
+
+        txtReadyPlayer1.SetText("Not Ready");
+    }
+
+    public void CancelP2()
+    {
+        isReadyP2 = false;
+
+        txtReadyPlayer2.SetText("Not Ready");
+    }
+
+    IEnumerator StartGameWait()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("Qpemainpertama");
     }
 }

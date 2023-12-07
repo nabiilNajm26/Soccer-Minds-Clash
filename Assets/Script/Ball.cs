@@ -38,10 +38,17 @@ public class Ball : MonoBehaviour
             Debug.Log("P2 Kena Bola");
             theOpponent.GetComponent<PlayerTwo>().canShoot = true;
         }
-        if (collision.gameObject.tag == "Target")
+        if (collision.gameObject.tag == "Target Left")
         {
             Debug.Log("Natap");
             kenaGawang.Play();
+            theBall.GetComponent<Rigidbody2D>().velocity = new Vector2(2,0);
+        }
+        if (collision.gameObject.tag == "Target Right")
+        {
+            Debug.Log("Natap");
+            kenaGawang.Play();
+            theBall.GetComponent<Rigidbody2D>().velocity = new Vector2(-2, 0);
         }
         if (collision.gameObject.tag == "HeadPlayer")
         {

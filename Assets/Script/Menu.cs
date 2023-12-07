@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     // Deklarasi variabel publik yang dapat diakses dari Editor Unity
-    public GameObject panelLoading, panelTransit;
+    public GameObject panelLoading, panelTransit, panelHint;
     public Image img_loading;
     public static bool isLoading = false;
     public Text txt_loading;
@@ -23,6 +23,7 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        panelHint.SetActive(false);
         // Memulai fungsi Start saat aplikasi/game pertama kali dijalankan
 
         // Memeriksa apakah isLoading bernilai false
@@ -81,8 +82,10 @@ public class Menu : MonoBehaviour
         // Menonaktifkan panelTransit setelah proses loading selesai
         
         panelTransit.SetActive(false);
+        panelHint.SetActive(true);
 
         yield return new WaitForSeconds(2f);
+        
         anim.Play(animationTitle);
     }
 
