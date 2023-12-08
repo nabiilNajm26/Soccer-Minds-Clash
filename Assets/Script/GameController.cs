@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -44,6 +45,8 @@ public class GameController : MonoBehaviour
     SimpanJawaban1 simpan1;
     SimpanJawaban2 simpan2;
 
+    [Header("First Selected Options")]
+    [SerializeField] public GameObject _pauseMenuFirst;
 
 
     public void Awake()
@@ -63,7 +66,10 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        /*EventSystem.current.SetSelectedGameObject(null);*/
+        /*        EventSystem.current.SetSelectedGameObject(_pauseMenuFirst);
+        */
 
         panelPause.SetActive(false);
         panelHelp.SetActive(false);
@@ -163,6 +169,21 @@ public class GameController : MonoBehaviour
         txt_GoalsRight.text = number_GoalsRight.ToString();
         txt_timeMatch.text = timeMatch.ToString();
 
+        /*if(isPaused)
+        {
+            OpenPause();
+        }
+        
+        if(!isPaused)
+        {
+            ClosePause();
+        }*/
+
+        if(EventSystem.current.currentSelectedGameObject == _pauseMenuFirst)
+        {
+            Debug.Log("bener cok");
+        }
+
     }
 
     IEnumerator BeginMatch()
@@ -237,34 +258,49 @@ public class GameController : MonoBehaviour
 
     }
 
+    public void OpenPause()
+    {
+        panelPause.SetActive(true);
+        btnSkillPlayer.SetActive(false);
+        btnSkillOpp.SetActive(false);
+        backSound.Pause();
+
+        
+
+
+        /*if (panelPause.activeSelf)
+        {
+            EventSystem.current.SetSelectedGameObject(_pauseMenuFirst);
+        }*/
+        
+    }
+
+    public void ClosePause()
+    {
+        backSound.UnPause();
+        panelPause.SetActive(false);
+        btnSkillPlayer.SetActive(true);
+        btnSkillOpp.SetActive(true);
+
+        
+    }
+
     public void ButtonPause()
     {
         if (isPaused == false)
         {
             isPaused = true;
-
-            panelPause.SetActive(true);
-            btnSkillPlayer.SetActive(false);
-            btnSkillOpp.SetActive(true);
-            backSound.Pause();
+            OpenPause();
             Time.timeScale = 0;
-
-            
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_pauseMenuFirst);
         }
 
         else if (isPaused == true)
         {
             isPaused = false;
-
-            backSound.UnPause();
-            panelPause.SetActive(false);
-            btnSkillPlayer.SetActive(true);
-            btnSkillOpp.SetActive(true);
-
-
-            Time.timeScale = 1;
+            ButtonResume();
             
-
         }
 
         /*panelPause.SetActive(true);
@@ -302,6 +338,9 @@ public class GameController : MonoBehaviour
     }
     public void ButtonResume()
     {
+        EventSystem.current.SetSelectedGameObject(_pauseMenuFirst);
+        EventSystem.current.SetSelectedGameObject(null);
+
         backSound.UnPause();
         panelPause.SetActive(false);
         btnSkillPlayer.SetActive(true);
@@ -309,6 +348,7 @@ public class GameController : MonoBehaviour
 
 
         Time.timeScale = 1;
+        
     }
     public void ButtonRestart()
     {
@@ -320,7 +360,6 @@ public class GameController : MonoBehaviour
         panelPause.SetActive(false);
         Time.timeScale = 1;
         /*StartCoroutine(WaitEndGame()); */
-
     }
 
     public void ButtonSkill1()
