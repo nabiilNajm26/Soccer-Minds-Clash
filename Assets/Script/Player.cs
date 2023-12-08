@@ -12,10 +12,19 @@ public class Player : MonoBehaviour
     public float speed = 8f;
     public float jumpingPower = 8f;
 
+    public int shootingPowerX = 200;
+    public int shootingPowerY = 300;
+
     public Rigidbody2D rb_player;
 
     public bool canShoot;
+    public bool canHead;
     private GameObject theBall;
+
+    public int hashShoot, hashJump, hashMoveFW, hashMoveBW;
+    public Animator theAniPlayer;
+
+    public AudioSource kick;
 
 
     // Start is called before the first frame update
@@ -23,6 +32,11 @@ public class Player : MonoBehaviour
     {
         rb_player = GetComponent<Rigidbody2D>();
         theBall = GameObject.FindGameObjectWithTag("Ball");
+
+        hashShoot = Animator.StringToHash("Shoot");
+        hashJump = Animator.StringToHash("Jump");
+        hashMoveBW = Animator.StringToHash("MoveBW");
+        hashMoveFW = Animator.StringToHash("MoveFW");
     }
     private void FixedUpdate()
     {
@@ -35,39 +49,79 @@ public class Player : MonoBehaviour
     {
         
     }
-
-    private bool isGrounded()
+    public bool isGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
+   /* private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            *//*theAniPlayer.SetBool("Jump", false);*//*
+        }
+    }
+*/
+    /*private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            theAniPlayer.SetBool("Jump", true);
+        }
+    }*/
+
+
     public void Move(InputAction.CallbackContext context)
     {
-            horizontal = context.ReadValue<Vector2>().x;   
+
+        horizontal = context.ReadValue<Vector2>().x;
+
+        if (isGrounded())
+        {
+            if (horizontal > 0)
+            {
+                theAniPlayer.SetTrigger("MoveFW");
+            }
+            else if (horizontal < 0)
+            {
+                theAniPlayer.SetTrigger("MoveBW");
+            }
+        }
+        
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        
 
         if (context.performed && isGrounded())
         {
+            theAniPlayer.SetTrigger("Jump");
             rb_player.velocity = new Vector2(rb_player.velocity.x, jumpingPower);
         }
         if(context.canceled && rb_player.velocity.y > 0f)
         {
             rb_player.velocity = new Vector2(rb_player.velocity.x, rb_player.velocity.y * 0.5f);
         }
-        /*else
-        {
-            rb_player.velocity = new Vector2(rb_player.velocity.x, jumpingPower);
-        }*/
+     
     }
+
     public void Shoot(InputAction.CallbackContext context)
     {
         Debug.Log(canShoot);
-        if(canShoot == true)
+        if(canShoot == true && context.performed)
         {
-            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(200, 250));
+            theAniPlayer.SetTrigger("Shoot");
+            kick.Play();
+            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(shootingPowerX, shootingPowerY));
+        }
+    }
+
+    public void Head()
+    {
+        if (canHead == true)
+        {
+            rb_player.velocity = new Vector2(rb_player.velocity.x, jumpingPower);
+            theBall.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            theBall.GetComponent<Rigidbody2D>().AddForce(new Vector2(300, 500));
         }
     }
 }

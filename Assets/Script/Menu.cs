@@ -9,14 +9,21 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     // Deklarasi variabel publik yang dapat diakses dari Editor Unity
-    public GameObject panelLoading, panelTransit;
+    public GameObject panelLoading, panelTransit, panelHint;
     public Image img_loading;
     public static bool isLoading = false;
     public Text txt_loading;
 
+    public AudioSource backsound;
+
+    public Animator anim;
+    public string animationTitle;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        panelHint.SetActive(false);
         // Memulai fungsi Start saat aplikasi/game pertama kali dijalankan
 
         // Memeriksa apakah isLoading bernilai false
@@ -30,6 +37,7 @@ public class Menu : MonoBehaviour
             // Jika isLoading true, menonaktifkan panelLoading
             panelLoading.SetActive(false);
         }
+
     }
 
     // Update is called once per frame
@@ -62,15 +70,23 @@ public class Menu : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         // Menampilkan panelTransit dan menunggu selama 1.5 detik
+        backsound.Play();
         panelTransit.SetActive(true);
         yield return new WaitForSeconds(1.5f);
 
         // Menonaktifkan panelLoading dan menunggu selama 1.5 detik
+        
         panelLoading.SetActive(false);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.7f);
 
         // Menonaktifkan panelTransit setelah proses loading selesai
+        
         panelTransit.SetActive(false);
+        panelHint.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+        
+        anim.Play(animationTitle);
     }
 
     // Method yang dipanggil saat tombol play ditekan
@@ -78,5 +94,15 @@ public class Menu : MonoBehaviour
     {
         // Memuat level "Play"
         SceneManager.LoadScene("Play");
+    }
+
+    public void ButtonTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
+    public void ButtonQuit()
+    {
+        Application.Quit();
     }
 }

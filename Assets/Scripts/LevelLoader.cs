@@ -23,8 +23,25 @@ public class LevelLoader : MonoBehaviour
 
     IEnumerator LoadLevel(int levelIndex)
     {
+
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(levelIndex);
+
+        
+        
+        if(levelIndex == 6)
+        {
+            yield return new WaitForSeconds(3f);
+            transition.SetTrigger("Start");
+            yield return new WaitForSeconds(3f);
+        }
+        else
+        {
+            transition.SetTrigger("Start");
+            yield return new WaitForSeconds(levelIndex);
+        }
+
+
         SceneManager.LoadScene(levelIndex);
     }
 }

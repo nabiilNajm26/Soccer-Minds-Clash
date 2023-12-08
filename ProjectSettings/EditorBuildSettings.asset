@@ -6,15 +6,31 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 4be9e5c47a7fcb44a83009ce436d2d96
-  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 7c366d8b7a8a6b1458739ed46fa1966e
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: d4baf1478f69eca4fb4518fd67221fe0
   - enabled: 1
     path: Assets/Scenes/Play.unity
     guid: 610a2cd412f59824fa61acf1dcfe3c04
   - enabled: 1
+    path: Assets/Scenes/Qpemainpertama.unity
+    guid: f5d453d7ea38a8f4aa7c50e72b413845
+  - enabled: 1
+    path: Assets/Scenes/QpemainkeduaTes.unity
+    guid: 3d49662a548491c47862e37af84d6af9
+  - enabled: 1
+    path: Assets/Scenes/nilai.unity
+    guid: a509e71bb0668e24883a897eb1012c0a
+  - enabled: 1
+    path: Assets/Scenes/LoadingGame.unity
+    guid: b5a7da40b640a1e4080f64afa5920f78
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 4be9e5c47a7fcb44a83009ce436d2d96
+  - enabled: 1
     path: Assets/Scenes/EndGame.unity
     guid: 88e68f783c98a8046aca8390dd6ed3a2
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 4afa8f2fdeb150d4c90bb088025a2e49, type: 2}

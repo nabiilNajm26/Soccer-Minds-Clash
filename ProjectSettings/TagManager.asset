@@ -8,6 +8,14 @@ TagManager:
   - GoalsRight
   - Ball
   - GoalsLeft
+  - Head
+  - OrientBall
+  - Target
+  - HeadPlayer
+  - HeadOpp
+  - Ground
+  - Target Right
+  - Target Left
   layers:
   - Default
   - TransparentFX

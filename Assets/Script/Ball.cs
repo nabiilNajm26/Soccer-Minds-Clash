@@ -8,6 +8,10 @@ public class Ball : MonoBehaviour
     private GameObject thePlayer;
     private GameObject theOpponent;
     public GameObject goals, theBall;
+
+    public AudioSource kenaGawang;
+    public AudioSource gol;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +38,33 @@ public class Ball : MonoBehaviour
             Debug.Log("P2 Kena Bola");
             theOpponent.GetComponent<PlayerTwo>().canShoot = true;
         }
+        if (collision.gameObject.tag == "Target Left")
+        {
+            Debug.Log("Natap");
+            kenaGawang.Play();
+            theBall.GetComponent<Rigidbody2D>().velocity = new Vector2(2,0);
+        }
+        if (collision.gameObject.tag == "Target Right")
+        {
+            Debug.Log("Natap");
+            kenaGawang.Play();
+            theBall.GetComponent<Rigidbody2D>().velocity = new Vector2(-2, 0);
+        }
+        if (collision.gameObject.tag == "HeadPlayer")
+        {
+            Debug.Log("P1 Kena Kepala");
+            thePlayer.GetComponent<Player>().canHead = true;
+            
+        }
+        if (collision.gameObject.tag == "HeadOpp")
+        {
+            Debug.Log("P2 Kena Kepala");
+            theOpponent.GetComponent<PlayerTwo>().canHead = true;
+            
+        }
         if (collision.gameObject.tag == "GoalsRight")
         {
+            gol.Play();
             if (GameController.instance.isScore == false && GameController.instance.endMatch == false)
             {
                 Instantiate(goals, new Vector3(0, -1, 0), Quaternion.identity);
@@ -62,6 +91,7 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.tag == "GoalsLeft")
         {
+            gol.Play();
             if (GameController.instance.isScore == false && GameController.instance.endMatch == false)
             {
                 Instantiate(goals, new Vector3(0, -1, 0), Quaternion.identity);
@@ -97,6 +127,16 @@ public class Ball : MonoBehaviour
         {
             Debug.Log("P2 Lepas Bola");
             theOpponent.GetComponent<PlayerTwo>().canShoot = false;
+        }
+        if (collision.gameObject.tag == "HeadPlayer")
+        {
+            Debug.Log("P1 Lepas Kepala");
+            thePlayer.GetComponent<Player>().canHead = false;
+        }
+        if (collision.gameObject.tag == "HeadOpp")
+        {
+            Debug.Log("P2 Lepas Kepala");
+            theOpponent.GetComponent<PlayerTwo>().canHead = false;
         }
     }
 }

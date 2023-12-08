@@ -245,4 +245,32 @@ public class QuizManager2 : MonoBehaviour
         button.GetComponent<Image>().color = warnaOnClick;
     }
 
+<<<<<<< HEAD
+=======
+    public void ButtonAns1()
+    {
+
+        funButton(0);
+
+    }
+    public void ButtonAns2()
+    {
+
+        funButton(1);
+
+    }
+    public void ButtonAns3()
+    {
+
+        funButton(2);
+
+    }
+    public void ButtonAns4()
+    {
+
+        funButton(3);
+
+    }
+
+>>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
 }
