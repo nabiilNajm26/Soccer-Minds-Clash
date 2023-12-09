@@ -190,7 +190,7 @@ public class Play : MonoBehaviour
 
     IEnumerator StartGameWait()
     {
-        yield return new WaitForSeconds(5);
-        SceneManager.LoadScene("Qpemainpertama");
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Scenepancingan");
     }
 }
