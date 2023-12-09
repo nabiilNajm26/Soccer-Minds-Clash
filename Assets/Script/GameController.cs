@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
     public GameObject kickOffMsg, matchOverMsg;
     public GameObject panelPause, panelHelp;
     private GameObject thePlayer, theOpponent;
+    public GameObject frozenP1, frozenP2;
+
 
     public string rematch;
     public string replay;
@@ -37,10 +39,13 @@ public class GameController : MonoBehaviour
     public AudioSource backSound, backSoundEnd;
     public AudioSource matchBegin, matchEnd;
 
-    public Sprite[] versiButtonSkill1, versiButtonSkill2;
+    public Sprite[] versiButtonSkill1, versiButtonSkill2, versiButtonSkill3;
 
     public Image buttonSkillPlayer, buttonSkillOpp;
     public GameObject btnSkillPlayer, btnSkillOpp;
+
+    public int randomSkillP1, randomSkillP2;
+    public int skillP1, skillP2;
 
     SimpanJawaban1 simpan1;
     SimpanJawaban2 simpan2;
@@ -61,23 +66,16 @@ public class GameController : MonoBehaviour
 
         isPaused = false;
         isHelp = false;
+
+        RandomizeSkill();
+
+        frozenP1.SetActive(false);
+        frozenP2.SetActive(false);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
-        /*EventSystem.current.SetSelectedGameObject(null);*/
-        /*        EventSystem.current.SetSelectedGameObject(_pauseMenuFirst);
-        */
-
-        panelPause.SetActive(false);
-        panelHelp.SetActive(false);
-
-        btnSkillPlayer.SetActive(true);
-        btnSkillOpp.SetActive(true);
-
-
         if (simpan1.GetJawaban() == "benar")
         {
             skillAvailP1 = true;
@@ -96,24 +94,21 @@ public class GameController : MonoBehaviour
             skillAvailP2 = false;
         }
 
+        btnSkillPlayer.SetActive(skillAvailP1);
+        btnSkillOpp.SetActive(skillAvailP2);
 
-        if (skillAvailP1 == true)
-        {
-            buttonSkillPlayer.sprite = versiButtonSkill1[0];
-        }
-        else if (skillAvailP1 == false)
-        {
-            buttonSkillPlayer.sprite = versiButtonSkill1[1];
-        }
+        Debug.Log(randomSkillP1 + " " + randomSkillP2);
 
-        if (skillAvailP2 == true)
-        {
-            buttonSkillOpp.sprite = versiButtonSkill2[0];
-        }
-        else if (skillAvailP2 == false)
-        {
-            buttonSkillOpp.sprite = versiButtonSkill2[1];
-        }
+        GetSkillP1(skillAvailP1);
+        GetSkillP2(skillAvailP2);
+
+
+        /*EventSystem.current.SetSelectedGameObject(null);*/
+        /*        EventSystem.current.SetSelectedGameObject(_pauseMenuFirst);
+        */
+
+        panelPause.SetActive(false);
+        panelHelp.SetActive(false);
 
         matchBegin.Play();
         backSound.Play();
@@ -366,14 +361,40 @@ public class GameController : MonoBehaviour
     {
         if (skillAvailP1 == true)
         {
-            thePlayer.GetComponent<Player>().speed += 4f;
-            thePlayer.GetComponent<Player>().jumpingPower += 2;
-            thePlayer.GetComponent<Player>().shootingPowerY += 200;
-            thePlayer.GetComponent<Player>().shootingPowerX += 100;
 
-            skillAvailP1 = false;
-            buttonSkillPlayer.sprite = versiButtonSkill1[1];
-            StartCoroutine(WaitSkill1());
+            if(skillP1 == 0)
+            {
+                thePlayer.GetComponent<Player>().speed += 4f;
+                thePlayer.GetComponent<Player>().jumpingPower += 2;
+                thePlayer.GetComponent<Player>().shootingPowerY += 200;
+                thePlayer.GetComponent<Player>().shootingPowerX += 100;
+
+                skillAvailP1 = false;
+                buttonSkillPlayer.sprite = versiButtonSkill1[1];
+                StartCoroutine(WaitSkill1P1());
+            }
+            if(skillP1 == 1)
+            {
+                thePlayer.GetComponent<Transform>().position += new Vector3(3f, 0.68f, 0f);
+                thePlayer.GetComponent<Transform>().localScale += new Vector3(0.4f, 0.4f, 0.4f);
+
+                skillAvailP1 = false;
+
+                buttonSkillPlayer.sprite = versiButtonSkill2[1];
+                StartCoroutine(WaitSkill2P1());
+            }
+            if(skillP1 == 2)
+            {
+                theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
+                theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionY;
+                frozenP2.SetActive(false);
+
+                skillAvailP1 = false;
+
+                buttonSkillPlayer.sprite = versiButtonSkill3[1];
+                StartCoroutine(WaitSkill3P1());
+            }
+            
         }
 
     }
@@ -382,13 +403,41 @@ public class GameController : MonoBehaviour
     {
         if (skillAvailP2 == true)
         {
-            theOpponent.GetComponent<Transform>().position += new Vector3(3f, 0.68f, 0f);
-            theOpponent.GetComponent<Transform>().localScale += new Vector3(0.4f, 0.4f, 0.4f);
 
-            skillAvailP2 = false;
+            if (skillP1 == 0)
+            {
+                theOpponent.GetComponent<PlayerTwo>().speed += 4f;
+                theOpponent.GetComponent<PlayerTwo>().jumpingPower += 2;
+                theOpponent.GetComponent<PlayerTwo>().shootingPowerY += 200;
+                theOpponent.GetComponent<PlayerTwo>().shootingPowerX += 100;
 
-            buttonSkillOpp.sprite = versiButtonSkill2[1];
-            StartCoroutine(WaitSkill2());
+                skillAvailP2 = false;
+                buttonSkillOpp.sprite = versiButtonSkill1[1];
+                StartCoroutine(WaitSkill1P2());
+            }
+            if (skillP1 == 1)
+            {
+                theOpponent.GetComponent<Transform>().position += new Vector3(3f, 0.68f, 0f);
+                theOpponent.GetComponent<Transform>().localScale += new Vector3(0.4f, 0.4f, 0.4f);
+
+                skillAvailP2 = false;
+
+                buttonSkillOpp.sprite = versiButtonSkill2[1];
+                StartCoroutine(WaitSkill2P2());
+            }
+            if (skillP1 == 2)
+            {
+                thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
+                thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionY;
+                frozenP1.SetActive(true);
+
+                skillAvailP2 = false;
+
+                buttonSkillOpp.sprite = versiButtonSkill3[1];
+                StartCoroutine(WaitSkill3P2());
+            }
+
+            
         }
 
     }
@@ -413,7 +462,7 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene("EndGame");
     }
 
-    IEnumerator WaitSkill1()
+    IEnumerator WaitSkill1P1()
     {
         yield return new WaitForSeconds(5);
 
@@ -423,7 +472,25 @@ public class GameController : MonoBehaviour
         thePlayer.GetComponent<Player>().shootingPowerX -= 100;
 
     }
-    IEnumerator WaitSkill2()
+    IEnumerator WaitSkill1P2()
+    {
+        yield return new WaitForSeconds(5);
+
+        theOpponent.GetComponent<Player>().speed -= 4f;
+        theOpponent.GetComponent<Player>().jumpingPower -= 2;
+        theOpponent.GetComponent<Player>().shootingPowerY -= 200;
+        theOpponent.GetComponent<Player>().shootingPowerX -= 100;
+    }
+    IEnumerator WaitSkill2P1()
+    {
+
+        yield return new WaitForSeconds(5);
+
+        thePlayer.GetComponent<Transform>().localScale -= new Vector3(0.4f, 0.4f, 0.4f);
+        thePlayer.GetComponent<Transform>().position -= new Vector3(3f, 0.68f, 0f);
+    }
+
+    IEnumerator WaitSkill2P2()
     {
 
         yield return new WaitForSeconds(5);
@@ -432,5 +499,76 @@ public class GameController : MonoBehaviour
         theOpponent.GetComponent<Transform>().position -= new Vector3(3f, 0.68f, 0f);
     }
 
-    
+    IEnumerator WaitSkill3P1()
+    {
+        yield return new WaitForSeconds(5);
+
+        frozenP2.SetActive(false);
+        theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.None;
+        theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    IEnumerator WaitSkill3P2()
+    {
+        yield return new WaitForSeconds(5);
+
+        frozenP1.SetActive(false);
+        thePlayer.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.None;
+        thePlayer.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    public void RandomizeSkill()
+    {
+        randomSkillP1 = UnityEngine.Random.Range(0, 2);
+        randomSkillP2 = UnityEngine.Random.Range(0, 2);
+    }
+
+    public void GetSkillP1(bool skillAvail)
+    {
+        if (skillAvail == true)
+        {
+            if (randomSkillP1 == 0)
+            {
+                skillP1 = 0;
+                buttonSkillPlayer.sprite = versiButtonSkill1[0];
+            }
+            else if (randomSkillP1 == 1)
+            {
+                skillP1 = 1;
+                buttonSkillPlayer.sprite = versiButtonSkill2[0];
+            }
+            else if (randomSkillP1 == 2)
+            {
+                skillP1 = 2;
+                buttonSkillPlayer.sprite = versiButtonSkill3[0];
+            }
+            else
+            {
+                buttonSkillPlayer.sprite = null;
+            }
+        } 
+    }
+
+    public void GetSkillP2(bool skillAvail)
+    {
+        if(skillAvail == true)
+        {
+            if (randomSkillP2 == 0)
+            {
+                skillP2 = 0;
+                buttonSkillOpp.sprite = versiButtonSkill1[0];
+            }
+            if (randomSkillP2 == 1)
+            {
+                skillP2 = 1;
+                buttonSkillOpp.sprite = versiButtonSkill2[0];
+            }
+            if (randomSkillP2 == 2)
+            {
+                skillP2 = 2;
+                buttonSkillOpp.sprite = versiButtonSkill3[0];
+            }
+        }
+        
+    }
 }
