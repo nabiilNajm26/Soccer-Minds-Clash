@@ -43,8 +43,6 @@ public class nilai : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(simpan1.GetJawaban());
-        Debug.Log(simpan2.GetJawaban());
         //Debug.Log(q1.Gettext());
         /*Debug.Log(q2.Bas2);
         string cek1 = q1.Bas1;*/

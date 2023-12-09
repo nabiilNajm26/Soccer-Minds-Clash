@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     // Deklarasi variabel publik yang dapat diakses dari Editor Unity
-    public GameObject panelLoading, panelTransit, panelHint;
+    public GameObject panelLoading, panelTransit, panelHint, panelQuit;
     public Image img_loading;
     public static bool isLoading = false;
     public Text txt_loading;
@@ -19,11 +20,16 @@ public class Menu : MonoBehaviour
     public Animator anim;
     public string animationTitle;
 
+    public bool isQuit = false;
+    public GameObject firstMenu, firstQuit;
 
     // Start is called before the first frame update
     void Start()
     {
         panelHint.SetActive(false);
+        panelQuit.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(firstMenu);
+
         // Memulai fungsi Start saat aplikasi/game pertama kali dijalankan
 
         // Memeriksa apakah isLoading bernilai false
@@ -103,6 +109,25 @@ public class Menu : MonoBehaviour
 
     public void ButtonQuit()
     {
+        if (isQuit == false)
+        {
+            isQuit = true;
+            panelQuit.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstQuit);
+        }
+    }
+
+    public void YesButtonQuit()
+    {
         Application.Quit();
+    }
+
+    public void NoButtonQuit()
+    {
+        panelQuit.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstMenu);
+        isQuit = false;
     }
 }
