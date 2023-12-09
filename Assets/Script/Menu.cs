@@ -16,6 +16,8 @@ public class Menu : MonoBehaviour
     public Text txt_loading;
 
     public AudioSource backsound;
+    public AudioSource backsoundSub;
+    public bool isAudioPlayed = true;
 
     public Animator anim;
     public string animationTitle;
@@ -30,6 +32,8 @@ public class Menu : MonoBehaviour
         panelQuit.SetActive(false);
         EventSystem.current.SetSelectedGameObject(firstMenu);
 
+        
+
         // Memulai fungsi Start saat aplikasi/game pertama kali dijalankan
 
         // Memeriksa apakah isLoading bernilai false
@@ -42,6 +46,7 @@ public class Menu : MonoBehaviour
         {
             // Jika isLoading true, menonaktifkan panelLoading
             panelLoading.SetActive(false);
+            backsoundSub.Play();
         }
 
     }
@@ -76,7 +81,10 @@ public class Menu : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         // Menampilkan panelTransit dan menunggu selama 1.5 detik
+        
         backsound.Play();
+        
+        
         panelTransit.SetActive(true);
         yield return new WaitForSeconds(1.5f);
 
@@ -93,6 +101,7 @@ public class Menu : MonoBehaviour
         yield return new WaitForSeconds(2f);
         
         anim.Play(animationTitle);
+        isAudioPlayed = false;
     }
 
     // Method yang dipanggil saat tombol play ditekan

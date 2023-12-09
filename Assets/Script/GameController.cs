@@ -94,6 +94,9 @@ public class GameController : MonoBehaviour
             skillAvailP2 = false;
         }
 
+        skillAvailP1 = true;
+        skillAvailP2 = true;
+
         btnSkillPlayer.SetActive(skillAvailP1);
         btnSkillOpp.SetActive(skillAvailP2);
 
@@ -385,9 +388,12 @@ public class GameController : MonoBehaviour
             }
             if(skillP1 == 2)
             {
-                theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
+                frozenP2.SetActive(true);
+                theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.None;
+                theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezeAll;
+                /*theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionX;
                 theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezePositionY;
-                frozenP2.SetActive(false);
+                theOpponent.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezeRotation;*/
 
                 skillAvailP1 = false;
 
@@ -476,10 +482,10 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
 
-        theOpponent.GetComponent<Player>().speed -= 4f;
-        theOpponent.GetComponent<Player>().jumpingPower -= 2;
-        theOpponent.GetComponent<Player>().shootingPowerY -= 200;
-        theOpponent.GetComponent<Player>().shootingPowerX -= 100;
+        theOpponent.GetComponent<PlayerTwo>().speed -= 4f;
+        theOpponent.GetComponent<PlayerTwo>().jumpingPower -= 2;
+        theOpponent.GetComponent<PlayerTwo>().shootingPowerY -= 200;
+        theOpponent.GetComponent<PlayerTwo>().shootingPowerX -= 100;
     }
     IEnumerator WaitSkill2P1()
     {
@@ -513,12 +519,14 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(5);
 
         frozenP1.SetActive(false);
-        thePlayer.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.None;
-        thePlayer.GetComponent<PlayerTwo>().rb_player.constraints = RigidbodyConstraints2D.FreezeRotation;
+        thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.None;
+        thePlayer.GetComponent<Player>().rb_player.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public void RandomizeSkill()
     {
+        randomSkillP1 = 2;
+
         randomSkillP1 = UnityEngine.Random.Range(0, 2);
         randomSkillP2 = UnityEngine.Random.Range(0, 2);
     }
