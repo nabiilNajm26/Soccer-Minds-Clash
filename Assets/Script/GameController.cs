@@ -9,6 +9,10 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+
+    //Tambahan
+    public LevelLoader Ld;
+
     public static GameController instance;
 
     public static int number_GoalsRight, number_GoalsLeft;
@@ -63,7 +67,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //tambahan
+        Ld = FindObjectOfType<LevelLoader>();
 
         panelPause.SetActive(false);
         panelHelp.SetActive(false);
@@ -319,7 +324,7 @@ public class GameController : MonoBehaviour
         timeMatch = 0;
         panelPause.SetActive(false);
         Time.timeScale = 1;
-        /*StartCoroutine(WaitEndGame()); */
+        StartCoroutine(WaitEndGame());
 
     }
 
@@ -370,8 +375,9 @@ public class GameController : MonoBehaviour
         Instantiate(matchOverMsg, new Vector3(0, -1, 0), Quaternion.identity);
 
         //Menunggu 3 detik dilanjutkan dengan pindah scene ke result atau scoreboard
-        yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("EndGame");
+        yield return new WaitForSeconds(1);
+        /*SceneManager.LoadScene("EndGame");*/
+        Ld.LoadNextLevel();
     }
 
     IEnumerator WaitSkill1()

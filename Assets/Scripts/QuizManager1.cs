@@ -30,12 +30,10 @@ public class QuizManager1 : MonoBehaviour
 
     SimpanJawaban1 simpan1;
 
-<<<<<<< HEAD
-    [System.Serializable] class Question
-=======
+
     [System.Serializable]
     class Question
->>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
+
     {
         [SerializeField] public string questionTxt;
         [SerializeField] public string[] choices = new string[4];
@@ -88,11 +86,9 @@ public class QuizManager1 : MonoBehaviour
 
     private void Update()
     {
-<<<<<<< HEAD
+
         if (Input.GetKeyUp(KeyCode.W))
-=======
-        /*if (Input.GetKeyUp(KeyCode.W))
->>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
+
         {
             funButton(0);
 
@@ -111,30 +107,21 @@ public class QuizManager1 : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.D))
         {
             funButton(3);
-<<<<<<< HEAD
+
         }
-=======
-        }*/
->>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
+
 
         currentTime -= 1 * Time.deltaTime;
         countdownText = countdownTxt.GetComponent<TMP_Text>();
         countdownText.text = currentTime.ToString("0");
 
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
 
         if (currentTime <= 0)
         {
             currentTime = 0;
-<<<<<<< HEAD
             if(!playerAnswered)
-=======
-            if (!playerAnswered)
->>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
+
             {
                 bAs1 = "salah";
                 Ld.LoadNextLevel();
@@ -142,15 +129,7 @@ public class QuizManager1 : MonoBehaviour
         }
 
 
-        /*StartCoroutine(StartCountdown());*/
 
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
-
-        //Debug.Log("bas1 = " + bAs1);
 
     }
 
@@ -177,11 +156,7 @@ public class QuizManager1 : MonoBehaviour
         button3.GetComponent<Button>().onClick.AddListener(delegate () { funButton(2); });
         button4.GetComponent<Button>().onClick.AddListener(delegate () { funButton(3); });
 
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
 
         // Initialization (Start the game)
         randomQues();
@@ -224,11 +199,7 @@ public class QuizManager1 : MonoBehaviour
             quesList[randomIndex] = temporary;
         }
 
-<<<<<<< HEAD
-          
-=======
 
->>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
     }
 
     void showQuestion()
@@ -298,9 +269,9 @@ public class QuizManager1 : MonoBehaviour
         return bAs1;
     }
 
-<<<<<<< HEAD
-}
-=======
+
+
+
     public void ButtonAns1()
     {
 
@@ -326,4 +297,4 @@ public class QuizManager1 : MonoBehaviour
 
     }
 }
->>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
+

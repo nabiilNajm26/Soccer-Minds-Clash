@@ -25,20 +25,20 @@ public class LevelLoader : MonoBehaviour
     {
 
         transition.SetTrigger("Start");
-        yield return new WaitForSeconds(levelIndex);
+        yield return new WaitForSeconds(3);
 
         
         
         if(levelIndex == 6)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             transition.SetTrigger("Start");
-            yield return new WaitForSeconds(3f);
+            /*yield return new WaitForSeconds(3f);*/
         }
         else
         {
             transition.SetTrigger("Start");
-            yield return new WaitForSeconds(levelIndex);
+            yield return new WaitForSeconds(2f);
         }
 
 

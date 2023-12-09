@@ -245,8 +245,6 @@ public class QuizManager2 : MonoBehaviour
         button.GetComponent<Image>().color = warnaOnClick;
     }
 
-<<<<<<< HEAD
-=======
     public void ButtonAns1()
     {
 
@@ -272,5 +270,5 @@ public class QuizManager2 : MonoBehaviour
 
     }
 
->>>>>>> c269fc66188381583d0dfcbcd83e2308a409b2cd
+
 }
