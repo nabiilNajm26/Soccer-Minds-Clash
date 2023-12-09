@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerTwo : MonoBehaviour
 {
+    public static PlayerTwo instance;
+
     public Transform groundCheck;
     public Transform denfece;
     public LayerMask groundLayer;
