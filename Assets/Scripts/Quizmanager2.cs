@@ -81,7 +81,7 @@ public class QuizManager2 : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        /*if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             funButton(0);
         }
@@ -99,7 +99,7 @@ public class QuizManager2 : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             funButton(3);
-        }
+        }*/
 
         currentTime -= 1 * Time.deltaTime;
         countdownText = countdownTxt.GetComponent<TMP_Text>();

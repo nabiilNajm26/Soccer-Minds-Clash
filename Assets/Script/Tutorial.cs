@@ -41,16 +41,8 @@ public class Tutorial : MonoBehaviour
 
         btnSkillPlayer.SetActive(true);
 
-        skillAvailP1 = true;
-
-        if (skillAvailP1 == true)
-        {
-            buttonSkillPlayer.sprite = versiButtonSkill1[0];
-        }
-        else if (skillAvailP1 == false)
-        {
-            buttonSkillPlayer.sprite = versiButtonSkill1[1];
-        }
+        theBall = GameObject.FindGameObjectWithTag("Ball");
+        thePlayer = GameObject.FindGameObjectWithTag("Player");
 
         matchBegin.Play();
         backSound.Play();
@@ -58,8 +50,7 @@ public class Tutorial : MonoBehaviour
        
         Time.timeScale = 1;
         Instantiate(kickOffMsg, new Vector3(0, -1, 0), Quaternion.identity);
-        theBall = GameObject.FindGameObjectWithTag("Ball");
-        thePlayer = GameObject.FindGameObjectWithTag("Player");
+        
         
 
 
@@ -76,7 +67,12 @@ public class Tutorial : MonoBehaviour
     public void ButtonEnd()
     {
         SceneManager.LoadScene("Menu");
-        
+    }
+
+    public void ResetBall()
+    {
+        theBall.transform.position = new Vector3(0, 0, 0);
+        new WaitForSeconds(1f);
     }
 
     public void ButtonSkill1()

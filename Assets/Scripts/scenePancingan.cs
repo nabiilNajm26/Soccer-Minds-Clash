@@ -12,6 +12,8 @@ public class ScenePancingan : MonoBehaviour
     public LevelLoader ld;
     private bool tbl1 = false;
     private bool tbl2 = false;
+    private bool isReadyP1 = false;
+    private bool isReadyP2 = false;
     [SerializeField] public GameObject button1;
     [SerializeField] public GameObject button2;
     [SerializeField] public TMP_Text txtbutton1;
@@ -20,8 +22,8 @@ public class ScenePancingan : MonoBehaviour
 
     private void Start()
     {
-        button1.GetComponent<Button>().onClick.AddListener(delegate () { funButton(0); });
-        button2.GetComponent<Button>().onClick.AddListener(delegate () { funButton(1); });
+        /*button1.GetComponent<Button>().onClick.AddListener(delegate () { funButton(0); });
+        button2.GetComponent<Button>().onClick.AddListener(delegate () { funButton(1); });*/
         /*button1.onClick.AddListener(delegate () { btn1(); });
         button2.onClick.AddListener(delegate () { btn2(); });*/
         ld = FindObjectOfType<LevelLoader>();
@@ -29,7 +31,7 @@ public class ScenePancingan : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        /*if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             funButton(0);
         }
@@ -37,11 +39,11 @@ public class ScenePancingan : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             funButton(1);
-        }
+        }*/
 
 
         // Implementasi ini memastikan bahwa kedua tombol ditekan sebelum memuat level berikutnya
-        if (tbl1 == false || tbl2 == false)
+        if (isReadyP1 == false || isReadyP2 == false)
         {
             // Satu dari dua tombol tidak ditekan
             Debug.Log("Tekan kedua tombol sebelum melanjutkan.");
@@ -52,7 +54,7 @@ public class ScenePancingan : MonoBehaviour
         ld.LoadNextLevel();
     }
 
-    void funButton(int choice)
+    /*void funButton(int choice)
     {
 
 
@@ -71,15 +73,15 @@ public class ScenePancingan : MonoBehaviour
         }
 
 
-        /*if (currentQues < quesList.Length - 1)
+        *//*if (currentQues < quesList.Length - 1)
         {
             currentQues += 1;
         }*/
 
         /*showQuestion();*/
-        /*StartCoroutine(WaitAndSwitchScene());*/
+        /*StartCoroutine(WaitAndSwitchScene());*//*
 
-    }
+    }*/
 
     void ChangeButtonColor(GameObject button)
     {
@@ -88,9 +90,19 @@ public class ScenePancingan : MonoBehaviour
     }
 
 
+    public void ReadyP1()
+    {
+        isReadyP1 = true;
+        ChangeButtonColor(button1);
+        txtbutton1.text = "Ready";
+    }
 
-
-
+    public void ReadyP2()
+    {
+        isReadyP2 = true;
+        ChangeButtonColor(button2);
+        txtbutton2.text = "Ready";
+    }
 
 
 

@@ -2014,34 +2014,128 @@ MonoBehaviour:
   txtbutton3: {fileID: 613771660}
   txtbutton4: {fileID: 1395808003}
   quesList:
-  - questionTxt: Tanggal ulang tahun hitler
+  - questionTxt: Berapa jumlah Ballon d'Or yang dimiliki oleh Cristiano Ronaldo
     choices:
-    - 14 Juli 2003
-    - 20 April 1889
-    - 10 Oktober 1878
-    - 4 Januari 1889
-    answer: 20 April 1889
-  - questionTxt: Dimanakah ibukota berlin
+    - 4
+    - 5
+    - 6
+    - 7
+    answer: 5
+  - questionTxt: Apa nama operasi penyerangan Israel yang dilakukan oleh Hamas pada
+      tanggal 7 Oktober 2023 yang lalu?
     choices:
-    - Berlin
-    - Munich
-    - Bantul
-    - Bogota
-    answer: Berlin
-  - questionTxt: Manakah yang termasuk benda cair
+    - Operasi Pembebasan Al-Aqsa
+    - Operasi Kilat Al-Aqsa
+    - Operasi Badai Al-Aqsa
+    - Operasi Pembebasan Palestina
+    answer: Operasi Badai Al-Aqsa
+  - questionTxt: Siapa nama aktor pemeran Buya Hamka dalam film Buya Hamka Vol. 1?
     choices:
-    - Bantal
-    - Api
-    - Air
-    - 'Kursi '
-    answer: Air
-  - questionTxt: Nama saya
+    - Dude Herlino
+    - Dede Yusuf
+    - Vino G Bastian
+    - Andhika Pratama
+    answer: Vino G Bastian
+  - questionTxt: Siapa nama CEO OpenAI sekarang?
     choices:
-    - alip
-    - jono
-    - klos
-    - jonas
-    answer: jonas
+    - Max Zuckerberg
+    - Ben Thompson
+    - Elon Musk
+    - Sam Altman
+    answer: Sam Altman
+  - questionTxt: Apa nama ibu kota masa depan Indonesia yang rencananya akan diresmikan
+      pada 17 Agustus 2024?
+    choices:
+    - Jaya Kencana
+    - Gajayana
+    - Merdeka Pura
+    - Nusantara
+    answer: Nusantara
+  - questionTxt: "Apa arti kata yang ada dalam bahasa Jawa \u2018njuk\u2019 dalam
+      bahasa Indonesia?"
+    choices:
+    - Menunjuk
+    - Meminta
+    - Memukul
+    - Kemudian
+    answer: Kemudian
+  - questionTxt: Apa kepanjangan gp dari kata MotoGP?
+    choices:
+    - Global Performance
+    - Grand Prix
+    - Giant Piston
+    - Glamorous Parade
+    answer: Grand Prix
+  - questionTxt: Apa nama mata uang dari negara Korea Selatan?
+    choices:
+    - Won
+    - Rupiah
+    - Yen
+    - Bath
+    answer: Won
+  - questionTxt: Apa nama sungai terpanjang di dunia?
+    choices:
+    - Amazon
+    - Mississippi
+    - Nil
+    - Musi
+    answer: Nil
+  - questionTxt: Ada berapa jumlah provinsi di Indonesia saat ini?
+    choices:
+    - 35
+    - 36
+    - 37
+    - 38
+    answer: 38
+  - questionTxt: Apa julukan Kota New York?
+    choices:
+    - The Rotten Apple
+    - The Big Apple
+    - The Sweet Apple
+    - The Large Apple
+    answer: The Big Apple
+  - questionTxt: Ada berapa jantung yang dimiliki gurita?
+    choices:
+    - 4
+    - 3
+    - 2
+    - 1
+    answer: 3
+  - questionTxt: Ada berapa jumlah planet dalam Tata Surya?
+    choices:
+    - 6
+    - 7
+    - 8
+    - 9
+    answer: 8
+  - questionTxt: Kapan diperingatinya hari batik nasional?
+    choices:
+    - 2 Oktober
+    - 22 Oktober
+    - 2 September
+    - 22 September
+    answer: 2 Oktober
+  - questionTxt: Terletak di provinsi mana Candi Kembar Batu berada?
+    choices:
+    - Jawa Timur
+    - Jawa Tengah
+    - Bengkulu
+    - Jambi
+    answer: Jambi
+  - questionTxt: Siapa ayah Najwa Shihab?
+    choices:
+    - Alwi Shihab
+    - Quraish Shihab
+    - Ahmad Shihab
+    - Latif Shihab
+    answer: Quraish Shihab
+  - questionTxt: Dimanakah negara yang menjadi tuan rumah piala dunia FIFA 1998?
+    choices:
+    - Prancis
+    - Argentina
+    - Meksiko
+    - Spanyol
+    answer: Prancis
   jwbPlayer1: 
   bAs1: 
 --- !u!1 &1411303954

@@ -56,7 +56,7 @@ public class EndGame : MonoBehaviour
 
         if(GameController.number_GoalsRight > GameController.number_GoalsLeft)
         {
-            matchResult.SetText("P1 Win");
+            matchResult.SetText("P2 Win");
         }
         else if(GameController.number_GoalsRight == GameController.number_GoalsLeft)
         {
@@ -64,7 +64,7 @@ public class EndGame : MonoBehaviour
         }
         else 
         {
-            matchResult.SetText("P2 Win");
+            matchResult.SetText("P1 Win");
         }
     }
 
@@ -82,7 +82,7 @@ public class EndGame : MonoBehaviour
     public void ButtonRematch()
     {
         rematch = true;
-        SceneManager.LoadScene("Qpemainpertama");
+        SceneManager.LoadScene("Scenepancingan");
     }
 
     public void ButtonPlay()
