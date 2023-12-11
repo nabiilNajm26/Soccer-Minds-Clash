@@ -46,6 +46,7 @@ public class Menu : MonoBehaviour
         {
             // Jika isLoading true, menonaktifkan panelLoading
             panelLoading.SetActive(false);
+            panelHint.SetActive(true);
             backsoundSub.Play();
         }
 
